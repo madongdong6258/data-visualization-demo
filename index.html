@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据可视化演示</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="loading-screen">
+        <div class="spinner"></div>
+        <p>加载中...</p>
+    </div>
+
+    <header>
+        <div class="logo">
+            <i class="fas fa-chart-pie"></i>
+            <span>数据魔方</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#overview" class="active">概览</a></li>
+                <li><a href="#economy">经济数据</a></li>
+                <li><a href="#environment">环境数据</a></li>
+                <li><a href="#social">社会数据</a></li>
+                <li><a href="#technology">科技趋势</a></li>
+            </ul>
+        </nav>
+        <div class="theme-switch">
+            <i class="fas fa-sun"></i>
+            <label class="switch">
+                <input type="checkbox" id="theme-toggle">
+                <span class="slider round"></span>
+            </label>
+            <i class="fas fa-moon"></i>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h1>探索数据的魅力世界</h1>
+                <p>通过精美的可视化图表，发现隐藏在数据背后的洞察</p>
+                <div class="hero-buttons">
+                    <button class="primary-btn">开始探索</button>
+                    <button class="secondary-btn">了解更多</button>
+                </div>
+                <div class="floating-charts">
+                    <div class="chart-item" data-speed="1.2">
+                        <div class="chart-preview" id="hero-chart-1"></div>
+                    </div>
+                    <div class="chart-item" data-speed="0.9">
+                        <div class="chart-preview" id="hero-chart-2"></div>
+                    </div>
+                    <div class="chart-item" data-speed="1.5">
+                        <div class="chart-preview" id="hero-chart-3"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="overview">
+            <div class="container">
+                <div class="section-header">
+                    <h2>全球数据概览</h2>
+                    <p>一眼洞察全球趋势与关键指标</p>
+                </div>
+                <div class="dashboard">
+                    <div class="metrics-row">
+                        <div class="metric-card">
+                            <div class="metric-icon"><i class="fas fa-users"></i></div>
+                            <div class="metric-data">
+                                <h3>全球人口</h3>
+                                <div class="metric-value" id="population-counter">7,963,254,000</div>
+                                <div class="metric-change positive">+1.05% <span>年增长率</span></div>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon"><i class="fas fa-globe-americas"></i></div>
+                            <div class="metric-data">
+                                <h3>GDP总量</h3>
+                                <div class="metric-value">$96.1万亿</div>
+                                <div class="metric-change positive">+3.8% <span>同比增长</span></div>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon"><i class="fas fa-thermometer-half"></i></div>
+                            <div class="metric-data">
+                                <h3>全球温度</h3>
+                                <div class="metric-value">+1.1°C</div>
+                                <div class="metric-change negative">+0.18°C <span>十年增长</span></div>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon"><i class="fas fa-tint"></i></div>
+                            <div class="metric-data">
+                                <h3>可再生能源</h3>
+                                <div class="metric-value">29.4%</div>
+                                <div class="metric-change positive">+1.2% <span>年增长</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-grid">
+                        <div class="chart-container">
+                            <div class="chart-header">
+                                <h3>地区人口分布</h3>
+                                <div class="chart-controls">
+                                    <button class="chart-control active" data-view="population">人口</button>
+                                    <button class="chart-control" data-view="density">密度</button>
+                                </div>
+                            </div>
+                            <div class="chart" id="population-chart"></div>
+                        </div>
+                        <div class="chart-container">
+                            <div class="chart-header">
+                                <h3>全球经济指标</h3>
+                                <div class="chart-controls">
+                                    <button class="chart-control active" data-period="year">年度</button>
+                                    <button class="chart-control" data-period="quarter">季度</button>
+                                </div>
+                            </div>
+                            <div class="chart" id="economy-chart"></div>
+                        </div>
+                        <div class="chart-container full-width">
+                            <div class="chart-header">
+                                <h3>国家发展指数对比</h3>
+                                <div class="chart-filters">
+                                    <select id="index-selector">
+                                        <option value="hdi">人类发展指数</option>
+                                        <option value="gini">基尼系数</option>
+                                        <option value="happiness">幸福指数</option>
+                                    </select>
+                                    <div class="search-container">
+                                        <input type="text" id="country-search" placeholder="搜索国家...">
+                                        <i class="fas fa-search"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chart" id="development-chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="economy">
+            <div class="container">
+                <div class="section-header">
+                    <h2>全球经济脉动</h2>
+                    <p>深入了解世界经济发展趋势与变化</p>
+                </div>
+                <div class="economy-dashboard">
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3>GDP增长趋势</h3>
+                            <div class="time-range-selector">
+                                <button class="time-btn active" data-range="5">5年</button>
+                                <button class="time-btn" data-range="10">10年</button>
+                                <button class="time-btn" data-range="20">20年</button>
+                            </div>
+                        </div>
+                        <div class="chart" id="gdp-growth-chart"></div>
+                    </div>
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3>行业分布</h3>
+                        </div>
+                        <div class="chart" id="industry-distribution-chart"></div>
+                    </div>
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3>全球贸易流动</h3>
+                        </div>
+                        <div class="chart" id="trade-flow-chart"></div>
+                    </div>
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3>货币汇率变化</h3>
+                        </div>
+                        <div class="chart" id="currency-chart"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="environment">
+            <div class="container">
+                <div class="section-header">
+                    <h2>环境与气候变化</h2>
+                    <p>追踪全球环境指标与保护进展</p>
+                </div>
+                <div class="environment-dashboard">
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3>温室气体排放</h3>
+                        </div>
+                        <div class="chart" id="emissions-chart"></div>
+                    </div>
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3>森林覆盖变化</h3>
+                        </div>
+                        <div class="chart" id="forest-chart"></div>
+                    </div>
+                    <div class="chart-container full-width">
+                        <div class="chart-header">
+                            <h3>全球气温变化</h3>
+                            <div class="interactive-controls">
+                                <label for="scenario-selector">排放情景:</label>
+                                <select id="scenario-selector">
+                                    <option value="optimistic">乐观情景</option>
+                                    <option value="balanced" selected>平衡情景</option>
+                                    <option value="pessimistic">悲观情景</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="chart" id="temperature-chart"></div>
+                    </div>
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3>可再生能源采用率</h3>
+                        </div>
+                        <div class="chart" id="renewable-chart"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="social">
+            <div class="container">
+                <div class="section-header">
+                    <h2>社会与人口洞察</h2>
+                    <p>探索全球社会发展与人口趋势</p>
+                </div>
+                <div class="social-dashboard">
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3>年龄结构变化</h3>
+                        </div>
+                        <div class="chart" id="age-structure-chart"></div>
+                    </div>
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3>教育水平分布</h3>
+                        </div>
+                        <div class="chart" id="education-chart"></div>
+                    </div>
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3>健康指标趋势</h3>
+                        </div>
+                        <div class="chart" id="health-chart"></div>
+                    </div>
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3>城市化进程</h3>
+                        </div>
+                        <div class="chart" id="urbanization-chart"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="technology">
+            <div class="container">
+                <div class="section-header">
+                    <h2>科技发展趋势</h2>
+                    <p>了解前沿科技领域的最新发展</p>
+                </div>
+                <div class="technology-dashboard">
+                    <div class="chart-container full-width">
+                        <div class="chart-header">
+                            <h3>全球研发投入</h3>
+                        </div>
+                        <div class="chart" id="rd-investment-chart"></div>
+                    </div>
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3>专利申请趋势</h3>
+                        </div>
+                        <div class="chart" id="patent-chart"></div>
+                    </div>
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3>互联网普及率</h3>
+                        </div>
+                        <div class="chart" id="internet-chart"></div>
+                    </div>
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3>技术领域热度</h3>
+                        </div>
+                        <div class="chart" id="tech-trends-chart"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>数据魔方</span>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>网站导航</h4>
+                        <ul>
+                            <li><a href="#overview">概览</a></li>
+                            <li><a href="#economy">经济数据</a></li>
+                            <li><a href="#environment">环境数据</a></li>
+                            <li><a href="#social">社会数据</a></li>
+                            <li><a href="#technology">科技趋势</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>关于我们</h4>
+                        <ul>
+                            <li><a href="#">团队介绍</a></li>
+                            <li><a href="#">数据来源</a></li>
+                            <li><a href="#">研究方法</a></li>
+                            <li><a href="#">联系我们</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>资源中心</h4>
+                        <ul>
+                            <li><a href="#">数据下载</a></li>
+                            <li><a href="#">API文档</a></li>
+                            <li><a href="#">常见问题</a></li>
+                            <li><a href="#">使用条款</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-newsletter">
+                    <h4>订阅更新</h4>
+                    <p>获取最新的数据分析和可视化资讯</p>
+                    <form>
+                        <input type="email" placeholder="输入您的邮箱">
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-weixin"></i></a>
+                        <a href="#"><i class="fab fa-weibo"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 数据魔方 | 数据可视化演示项目</p>
+                <p>数据更新时间: 2025年3月</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 脚本引入 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7.8.5/dist/d3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/countup.js@2.6.2/dist/countUp.min.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
